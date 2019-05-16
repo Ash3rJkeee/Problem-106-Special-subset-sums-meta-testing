@@ -6,22 +6,17 @@ import itertools
 def pairs_comparison(b, c):
     """попарно сравнивает множества между собой"""
     if b[0] > c[0]:
-        if len(b) == 2:
+        if len(b) == 1:
             return True
-        if c[-1] < b[0]:
-            return False
         for i in range(1, len(b)):
             if b[i] < c[i]:
-                return False
+                return True
     if b[0] < c[0]:
         if len(b) == 1:
             return True
-        if c[-1] > b[0]:
-            return False
         for i in range(1, len(b)):
             if b[i] > c[i]:
-                return False
-    return True
+                return True
 
 
 a = [20, 31, 38, 39, 40, 42, 45]
