@@ -1,13 +1,12 @@
 """Условие задачи http://euler.jakumo.org/problems/view/106.html"""
 
-# todo 1) Написать функцию проверки пар подмножеств на удовлетворение условию. ГОТОВО
-# todo 2) Найти оптимальное А для n=12.
-# todo 3) Переписать функцию уточнения (оптимизации) А для n=12 или для неограниченного количества n.
-
 import itertools
+import datetime
 
 
 def find_pairs(input):
+    """отбирает пары подмножеств, которые необходимо проверить на равенство"""
+
     def pairs_comparison(b, c):
         """попарно сравнивает множества между собой"""
         if b[0] > c[0]:
@@ -36,6 +35,12 @@ def find_pairs(input):
     num = 0
 
     for b in combinations:
+        print_index = combinations.index(b)
+        done = (print_index / len(combinations)) * 100
+        done = round(done, 1)
+        print("\r", end="")
+        print("\rВыполнено " + str(done) + "%.", end="")
+
         c_ = list(combinations)
         c_.remove(b)
         for c in c_:
@@ -58,19 +63,31 @@ def find_pairs(input):
     return pair_combinations
 
 
+# a4 = [3, 5, 6, 7]
+# a7 = [20, 31, 38, 39, 40, 42, 45]
 
+start = datetime.datetime.now()
 
-
-a = [20, 31, 38, 39, 40, 42, 45]
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 pair_combinations = find_pairs(a)
 
+finish = datetime.datetime.now()
+elapsed_time = finish - start
 
+
+# вывод результата в консоль
 num = 0
 for pair in pair_combinations:
+    if pair_combinations.index(pair) == 0:
+        print()
     print(num, pair)
     num = num + 1
 
+print()
+print("Вычисления закончены и заняли ", elapsed_time.seconds, "секунд.")
 
-# a4 = [3, 5, 6, 7]
-# a7 = [20, 31, 38, 39, 40, 42, 45]
+# ответ 21384
+# 394 секунды
+
+
 
